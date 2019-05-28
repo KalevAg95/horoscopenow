@@ -7,8 +7,8 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-import { Header, ThemeProvider, Image } from 'react-native-elements';
+import {Platform, StyleSheet, Text, View, Image} from 'react-native';
+import { Header, ThemeProvider } from 'react-native-elements';
 import { FlatGrid } from 'react-native-super-grid';
 
 const instructions = Platform.select({
@@ -22,18 +22,18 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     const items = [
-      { name: 'PISCES', color: '#1abc9c', text: 'February 19 - March 20' },
-      { name: 'AQUARIUS', color: '#2ecc71', text: 'February 19 - March 20' },
-      { name: 'CAPRICORN', color: '#3498db', text: 'February 19 - March 20' },
-      { name: 'SAGITTARIUS', color: '#9b59b6', text: 'February 19 - March 20' },
-      { name: 'SCORPIO', color: '#34495e', text: 'February 19 - March 20' },
-      { name: 'LIBRA', color: '#16a085', text: 'February 19 - March 20' },
-      { name: 'VIRGO', color: '#27ae60', text: 'February 19 - March 20' },
-      { name: 'LEO', color: '#2980b9', text: 'February 19 - March 20' },
-      { name: 'CANCER', color: '#8e44ad', text: 'February 19 - March 20' },
-      { name: 'GEMINI', color: '#2c3e50', text: 'February 19 - March 20' },
-      { name: 'TAURUS', color: '#f1c40f', text: 'February 19 - March 20' },
-      { name: 'ARIES', color: '#e67e22', text: 'February 19 - March 20' }
+      { name: 'PISCES', color: '#1abc9c', text: 'February 19 - March 20', img:require('./res/horos_icons/pisces-fishes-shapes-sign.png') },
+      { name: 'AQUARIUS', color: '#2ecc71', text: 'January 20 - February 18', img:require('./res/horos_icons/aquarius-zodiac-sign-symbol-1.png') },
+      { name: 'CAPRICORN', color: '#3498db', text: 'December 22 - January 19', img:require('./res/horos_icons/capricorn.png') },
+      { name: 'SAGITTARIUS', color: '#9b59b6', text: 'November 22 - December 21', img:require('./res/horos_icons/sagittarius-sign-of-an-archer.png') },
+      { name: 'SCORPIO', color: '#34495e', text: 'October 23 - November 21', img:require('./res/horos_icons/scorpion-shape.png') },
+      { name: 'LIBRA', color: '#16a085', text: 'September 23 - October 22', img:require('./res/horos_icons/libra-balanced-scale-zodiac-symbol.png') },
+      { name: 'VIRGO', color: '#27ae60', text: 'August 23 - September 22', img:require('./res/horos_icons/virgo-female-silhouette.png') },
+      { name: 'LEO', color: '#2980b9', text: 'July 23 - August 22', img:require('./res/horos_icons/leo-lion-astrological-symbol.png') },
+      { name: 'CANCER', color: '#8e44ad', text: 'June 21 - July 22', img:require('./res/horos_icons/cancer-1.png') },
+      { name: 'GEMINI', color: '#2c3e50', text: 'May 21 - June 20', img:require('./res/horos_icons/gemini-twins-symbol.png') },
+      { name: 'TAURUS', color: '#f1c40f', text: 'April 20 - May 20', img:require('./res/horos_icons/taurus-bull-head-symbol-for-zodiac.png') },
+      { name: 'ARIES', color: '#e67e22', text: 'March 21 - April 19', img:require('./res/horos_icons/aries-zodiac-symbol-of-frontal-goat-head.png') }
     ];
     return (
       <ThemeProvider>
@@ -57,6 +57,7 @@ export default class App extends Component<Props> {
           // spacing={20}
           renderItem={({ item, index }) => (
             <View style={[styles.itemContainer, { backgroundColor: item.color }]}>
+              <Image source={item.img} style={{width: 50, height: 50}} />
               <Text style={styles.itemName}>{item.name}</Text>
               <Text style={styles.itemCode}>{item.text}</Text>
             </View>
