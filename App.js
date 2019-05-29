@@ -8,7 +8,7 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import { Header, ThemeProvider, Button } from 'react-native-elements';
+import { Header, ThemeProvider, Rating,AirbnbRating } from 'react-native-elements';
 import { FlatGrid } from 'react-native-super-grid';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
@@ -36,41 +36,29 @@ const items = [
   { name: 'ARIES', color: '#F8BE80', text: 'March 21 - April 19', img: require('./res/horos_icons/aries-zodiac-symbol-of-frontal-goat-head.png') }
 ];
 
-
 class App extends Component{
   render() {
     return (
       <ThemeProvider>
-      {/*<Header
-        statusBarProps={{ barStyle: 'dark-content' }}
-        barStyle="dark-content" // or directly
-        centerComponent={{ text: 'HOROSCOPE', style: { color: '#4C566A', fontSize: 25, } }}
-        containerStyle={{
-          backgroundColor: '#141516',
-          justifyContent: 'space-around',
-        }}
-      />
-      */}
-
-      <View style={styles.container}>
-        <FlatGrid
-          itemDimension={130}
-          items={items}
-          style={styles.gridView}
-          // staticDimension={300}
-          // fixed
-          // spacing={20}
-          renderItem={({ item, index }) => (
-            <TouchableOpacity 
-            onPress={()=> this.props.navigation.navigate('Sign', {currentSign: item})}
-            style={[styles.itemContainer, { backgroundColor: item.color }]}>
-              <Image source={item.img} style={{width: 50, height: 50}} />
-              <Text style={styles.itemName}>{item.name}</Text>
-              <Text style={styles.itemCode}>{item.text}</Text>            
-            </TouchableOpacity>
-          )}
-        />     
-      </View>
+        <View style={styles.container}>
+          <FlatGrid
+            itemDimension={130}
+            items={items}
+            style={styles.gridView}
+            // staticDimension={300}
+            // fixed
+            // spacing={20}
+            renderItem={({ item, index }) => (
+              <TouchableOpacity 
+              onPress={()=> this.props.navigation.navigate('Sign', {currentSign: item})}
+              style={[styles.itemContainer, { backgroundColor: item.color }]}>
+                <Image source={item.img} style={{width: 50, height: 50}} />
+                <Text style={styles.itemName}>{item.name}</Text>
+                <Text style={styles.itemCode}>{item.text}</Text>            
+              </TouchableOpacity>
+            )}
+          />     
+        </View>
       </ThemeProvider>
     );
   }
@@ -114,10 +102,34 @@ class Sign extends Component{
           <Image source={this.state.currentSign.img} style={{width: 200, height: 200}} />
           <Text>{this.state.dataSource.sunsign}</Text>
           <Text>{this.state.dataSource.date}</Text>
-          <Text>{this.state.dataSource.horoscope}</Text>          
-          {/*<Button onPress={()=> this.props.navigation.navigate('Home')} title="To app"></Button>*/}
+          <Text>{this.state.dataSource.horoscope}</Text>
+          <Text>Love: </Text>
+          <Rating
+            type='heart'
+            startingValue={5}
+            ratingCount={5}
+            imageSize={30}
+            ratingBackgroundColor='#c8c7c8'
+            readonly={true}
+          />
+          <Text>Money: </Text>
+          <Rating
+          type='rocket'
+            ratingCount={5}
+            startingValue={2}
+            imageSize={30}          
+            ratingBackgroundColor='#c8c7c8'
+            readonly={true}
+          />
+          <Text>Luck: </Text>
+          <Rating
+            ratingCount={5}
+            startingValue={3}
+            imageSize={30}
+            ratingBackgroundColor='#c8c7c8'
+            readonly={true}
+          />
         </View>
-      
       </ThemeProvider>
     );
   }
@@ -170,7 +182,7 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 10,
   },
-  
+
 
 
 });
