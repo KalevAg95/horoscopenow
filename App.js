@@ -10,6 +10,8 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, TouchableHighlight, Alert} from 'react-native';
 import { Header, ThemeProvider } from 'react-native-elements';
 import { FlatGrid } from 'react-native-super-grid';
+import { createAppContainer, createStackNavigator } from 'react-navigation';
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -18,8 +20,7 @@ const instructions = Platform.select({
     'and yearly Horscopes',
 });
 
-type Props = {};
-export default class App extends Component<Props> {
+class App extends Component {
   _onPressButton() {
     Alert.alert('You tapped the button!')
   }
@@ -68,6 +69,7 @@ export default class App extends Component<Props> {
               <Image source={item.img} style={{width: 50, height: 50, tintColor:item.color2}} />
               <Text style={styles.itemName}>{item.name}</Text>
               <Text style={styles.itemCode}>{item.text}</Text>
+              {/*<Button onPress={()=> this.props.navigation.navigate('Sign')} title="To Sign"></Button>*/}
             </View>
             </TouchableHighlight>
           )}
@@ -82,6 +84,44 @@ export default class App extends Component<Props> {
     );
   }
 }
+
+class Sign extends Component{
+  render() {
+    const items = [
+      { name: 'PISCES', color: '#1abc9c', text: 'February 19 - March 20', img: require('./res/horos_icons/pisces-fishes-shapes-sign.png') },
+      { name: 'AQUARIUS', color: '#2ecc71', text: 'January 20 - February 18', img: require('./res/horos_icons/aquarius-zodiac-sign-symbol-1.png') },
+      { name: 'CAPRICORN', color: '#3498db', text: 'December 22 - January 19', img: require('./res/horos_icons/capricorn.png') },
+      { name: 'SAGITTARIUS', color: '#9b59b6', text: 'November 22 - December 21', img: require('./res/horos_icons/sagittarius-sign-of-an-archer.png') },
+      { name: 'SCORPIO', color: '#34495e', text: 'October 23 - November 21', img: require('./res/horos_icons/scorpion-shape.png') },
+      { name: 'LIBRA', color: '#16a085', text: 'September 23 - October 22', img: require('./res/horos_icons/libra-balanced-scale-zodiac-symbol.png') },
+      { name: 'VIRGO', color: '#27ae60', text: 'August 23 - September 22', img: require('./res/horos_icons/virgo-female-silhouette.png') },
+      { name: 'LEO', color: '#2980b9', text: 'July 23 - August 22', img: require('./res/horos_icons/leo-lion-astrological-symbol.png') },
+      { name: 'CANCER', color: '#8e44ad', text: 'June 21 - July 22', img: require('./res/horos_icons/cancer-1.png') },
+      { name: 'GEMINI', color: '#2c3e50', text: 'May 21 - June 20', img: require('./res/horos_icons/gemini-twins-symbol.png') },
+      { name: 'TAURUS', color: '#f1c40f', text: 'April 20 - May 20', img: require('./res/horos_icons/taurus-bull-head-symbol-for-zodiac.png') },
+      { name: 'ARIES', color: '#e67e22', text: 'March 21 - April 19', img: require('./res/horos_icons/aries-zodiac-symbol-of-frontal-goat-head.png') }
+    ];
+    return (
+      <ThemeProvider>
+      <Header
+        statusBarProps={{ barStyle: 'dark-content' }}
+        barStyle="dark-content" // or directly
+        centerComponent={{ text: 'SIGN', style: { color: '#4C566A', fontSize: 25, } }}
+        containerStyle={{
+          backgroundColor: '#141516',
+          justifyContent: 'space-around',
+        }}
+      />
+      {/*
+      <View style={styles.container}>
+         <Button onPress={()=> this.props.navigation.navigate('Home')} title="To app"></Button>
+      </View>
+      */}
+      </ThemeProvider>
+    );
+  }
+}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -130,3 +170,14 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+ 
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: App
+  },
+  Sign: {
+    screen: Sign
+  }
+});
+
+export default createAppContainer(AppNavigator);
