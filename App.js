@@ -71,11 +71,7 @@ class App extends Component{
             </TouchableOpacity>
           )}
         />
-       {/*
-        <Text style={styles.welcome}>Tap on your Sign to get Started</Text>
-        <Text style={styles.instructions}>Horoscopes are updated daily</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        */}
+     
       </View>
       </ThemeProvider>
     );
@@ -113,16 +109,7 @@ class Sign extends Component{
   render() {
     return (
       <ThemeProvider>
-        {/*<Header
-          statusBarProps={{ barStyle: 'dark-content' }}
-          barStyle="dark-content" // or directly
-          centerComponent={{ text: 'SIGN', style: { color: '#4C566A', fontSize: 25, } }}
-          containerStyle={{
-            backgroundColor: '#141516',
-            justifyContent: 'space-around',
-          }}
-        />*/}
-        
+
         <View style={styles.container}>
           <Text>{this.state.dataSource.sunsign}</Text>
           <Text>{this.state.dataSource.date}</Text>
