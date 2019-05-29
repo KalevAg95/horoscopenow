@@ -66,12 +66,10 @@ class App extends Component{
             style={[styles.itemContainer, { backgroundColor: item.color }]}>
               <Image source={item.img} style={{width: 50, height: 50}} />
               <Text style={styles.itemName}>{item.name}</Text>
-              <Text style={styles.itemCode}>{item.text}</Text>
-            
+              <Text style={styles.itemCode}>{item.text}</Text>            
             </TouchableOpacity>
           )}
-        />
-     
+        />     
       </View>
       </ThemeProvider>
     );
