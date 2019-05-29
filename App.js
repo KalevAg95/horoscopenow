@@ -62,7 +62,7 @@ class App extends Component{
           // spacing={20}
           renderItem={({ item, index }) => (
             <TouchableOpacity 
-            onPress={()=> this.props.navigation.navigate('Sign', {currentSign: item.name})}
+            onPress={()=> this.props.navigation.navigate('Sign', {currentSign: item})}
             style={[styles.itemContainer, { backgroundColor: item.color }]}>
               <Image source={item.img} style={{width: 50, height: 50}} />
               <Text style={styles.itemName}>{item.name}</Text>
@@ -83,12 +83,14 @@ class Sign extends Component{
     this.state = {
       isLoading: true,
       dataSource: false,
+      currentSign: this.props.navigation.getParam('currentSign', 'No Sign'),
     }
   }
   
   componentDidMount(){
-    const currentSign = this.props.navigation.getParam('currentSign', 'No Sign');
-    let request = 'https://horoscope-api.herokuapp.com/horoscope/today/'+currentSign;
+    
+
+    let request = 'https://horoscope-api.herokuapp.com/horoscope/today/'+this.state.currentSign.name;
 
     fetch(request)
       .then((response)=> response.json())
@@ -109,6 +111,7 @@ class Sign extends Component{
       <ThemeProvider>
 
         <View style={styles.container}>
+          <Image source={this.state.currentSign.img} style={{width: 200, height: 200}} />
           <Text>{this.state.dataSource.sunsign}</Text>
           <Text>{this.state.dataSource.date}</Text>
           <Text>{this.state.dataSource.horoscope}</Text>          
@@ -167,6 +170,9 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 10,
   },
+  
+
+
 });
  
 const AppNavigator = createStackNavigator({
