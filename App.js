@@ -40,49 +40,48 @@
       headerTintColor: '#CFD8DC',
       headerStyle:{ backgroundColor: '#ffff', color: '#CFD8DC', fontSize: 28},
     };
-   render() {
-     return (
-       <ThemeProvider>
-       {/*<Header
-         statusBarProps={{ barStyle: 'dark-content' }}
-         barStyle="dark-content" // or directly
-         centerComponent={{ text: 'HOROSCOPE', style: { color: '#CFD8DC', fontSize: 28, } }}
-         containerStyle={{
-           backgroundColor: '#455A64',
-           justifyContent: 'space-around',
-         }}
-       />
-       */}
- 
-       <View style={styles.container}>
-         <FlatGrid
-           itemDimension={137}
-           items={items}
-           style={styles.gridView}
-           spacing={0}
-           // staticDimension={300}
-           // fixed
-           // spacing={20}
-           renderItem={({ item, index }) => (
-             <TouchableHighlight 
-             onPress={()=> this.props.navigation.navigate('Sign', {currentSign: item})} underlayColor="white">
-             <View style={[styles.itemContainer, { backgroundColor: item.color }]}>
-               <Image source={item.img} style={{width: 50, height: 50, tintColor:item.color2}} />
-               <Text style={[styles.itemName, {color:item.color2}]}>{item.name}</Text>
-               <Text style={[styles.itemCode, {color:item.color2}]}>{item.text}</Text>
-               {/*<Button onPress={()=> this.props.navigation.navigate('Sign')} title="To Sign"></Button>*/}
-             </View>
-             </TouchableHighlight>
-           )}
-         />
-         <Text style={styles.welcome}>Fucking Amazing AD</Text>
-         <Text style={styles.instructions}>HERE</Text>
-         <Text style={styles.instructions}>{instructions}</Text>
-       </View>
-       </ThemeProvider>
-     );
-   }
- }
+  render() {
+    return (
+      <ThemeProvider>
+      {/*<Header
+        statusBarProps={{ barStyle: 'dark-content' }}
+        barStyle="dark-content" // or directly
+        centerComponent={{ text: 'HOROSCOPE', style: { color: '#CFD8DC', fontSize: 28, } }}
+        containerStyle={{
+          backgroundColor: '#455A64',
+          justifyContent: 'space-around',
+        }}
+      />
+      */}
+      <View style={styles.container}>
+        <FlatGrid
+          itemDimension={137}
+          items={items}
+          style={styles.gridView}
+          spacing={0}
+          // staticDimension={300}
+          // fixed
+          // spacing={20}
+          renderItem={({ item, index }) => (
+            <TouchableHighlight 
+            onPress={()=> this.props.navigation.navigate('Sign', {currentSign: item})} underlayColor="white">
+            <View style={[styles.itemContainer, { backgroundColor: item.color }]}>
+              <Image source={item.img} style={{width: 50, height: 50, tintColor:item.color2}} />
+              <Text style={[styles.itemName, {color:item.color2}]}>{item.name}</Text>
+              <Text style={[styles.itemCode, {color:item.color2}]}>{item.text}</Text>
+              {/*<Button onPress={()=> this.props.navigation.navigate('Sign')} title="To Sign"></Button>*/}
+            </View>
+            </TouchableHighlight>
+          )}
+        />
+        <Text style={styles.welcome}>Fucking Amazing AD</Text>
+        <Text style={styles.instructions}>HERE</Text>
+        <Text style={styles.instructions}>{instructions}</Text>
+      </View>
+      </ThemeProvider>
+    );
+  }
+}
  
  class Sign extends Component{
   static navigationOptions = {
@@ -100,28 +99,22 @@
   }
   
   componentDidMount(){
-    
-
     let request = 'https://horoscope-api.herokuapp.com/horoscope/today/'+this.state.currentSign.name;
-
     fetch(request)
-      .then((response)=> response.json())
-      .then((responseJson) => {
-
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson
-        })
-
-      }).catch((error)=>{
-        console.log(error);
+    .then((response)=> response.json())
+    .then((responseJson) => {
+      this.setState({
+        isLoading: false,
+        dataSource: responseJson
       })
+    }).catch((error)=>{
+      console.log(error);
+    })
   }
 
   render() {
     return (
       <ThemeProvider>
-
         <View style={[styles.container2, {backgroundColor: this.state.currentSign.color}]}>
           <Image source={this.state.currentSign.img} style={{width: 150, height: 150, tintColor: this.state.currentSign.color2}} />
           <Card 
@@ -171,9 +164,6 @@
     );
   }
 }
-
- 
- 
  
  const styles = StyleSheet.create({
    container: {
@@ -212,15 +202,6 @@
      fontWeight: '600',
      fontSize: 10,
    },
-   sectionHeader: {
-     flex: 1,
-     fontSize: 15,
-     fontWeight: '600',
-     alignItems: 'center',
-     backgroundColor: '#636e72',
-     color: 'white',
-     padding: 10,
-   },
    container2: {
     flex: 1,
     justifyContent: 'center',
@@ -228,10 +209,6 @@
     backgroundColor: '#ffffff',
     marginTop: -90
     },
-   signDesc:{
-    fontSize: 25,
-    marginTop: 15,
-   },
    cardTitle:{
     fontSize: 25
    },
