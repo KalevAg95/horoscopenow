@@ -9,7 +9,7 @@
 
  import React, {Component} from 'react';
  import {Platform, StyleSheet, Text, View, Image, TouchableHighlight, TouchableOpacity, Alert} from 'react-native';
- import { Header, ThemeProvider, Rating } from 'react-native-elements';
+ import { Header, ThemeProvider, Rating, Card, ListItem } from 'react-native-elements';
  import { FlatGrid } from 'react-native-super-grid';
  import { createAppContainer, createStackNavigator } from 'react-navigation';
  import { AdMobBanner } from 'react-native-admob';
@@ -39,9 +39,9 @@
 ];
  class App extends Component{
     static navigationOptions = {
-      title: 'Welcome',
+      title: 'HOROSCOPES NOW',
       headerTintColor: '#CFD8DC',
-      headerStyle:{ backgroundColor: '#455A64', color: '#CFD8DC', fontSize: 28},
+      headerStyle:{ backgroundColor: '#ffff', color: '#CFD8DC', fontSize: 28},
     };
    render() {
      return (
@@ -96,9 +96,9 @@
  class Sign extends Component{
   
   static navigationOptions = {
-    title: 'Back',
+    title: 'HOROSCOPES NOW',
     headerTintColor: '#CFD8DC',
-    headerStyle:{ backgroundColor: '#455A64', color: '#CFD8DC', fontSize: 28},
+    headerStyle:{ backgroundColor: '#ffff', color: '#CFD8DC', fontSize: 28},
   };
 
   constructor(props){
@@ -160,37 +160,51 @@
 
     return (
       <ThemeProvider>
-        <View style={styles.container}>
-          <Image source={this.state.currentSign.img} style={{width: 200, height: 200}} />
-          <Text>{this.state.dataSource.sunsign}</Text>
-          <Text>{this.state.dataSource.date}</Text>
-          <Text>{this.state.dataSource.horoscope}</Text>         
-          <Text>Love: </Text>
-          <Rating
-            type='heart'            
-            ratingCount={5}
-            startingValue={this.state.loveRate}
-            imageSize={30}
-            ratingBackgroundColor='#c8c7c8'
-            readonly={true}
-          />
-          <Text>Money: </Text>
-          <Rating
-            type='rocket'
-            ratingCount={5}
-            startingValue={this.state.moneyRate}
-            imageSize={30}          
-            ratingBackgroundColor='#c8c7c8'
-            readonly={true}
-          />
-          <Text>Luck: </Text>
-          <Rating
-            ratingCount={5}
-            startingValue={this.state.luckRate}
-            imageSize={30}
-            ratingBackgroundColor='#c8c7c8'
-            readonly={true}
-          />
+
+        <View style={[styles.container2, {backgroundColor: this.state.currentSign.color}]}>
+          <Image source={this.state.currentSign.img} style={{width: 150, height: 150, tintColor: this.state.currentSign.color2}} />
+          <Card 
+          title={this.state.dataSource.sunsign}
+          style={styles.cardTitle}>
+            <View style={styles.user}>
+              <Text style={styles.cardDate}>{this.state.dataSource.date}</Text>
+              <Text style={styles.cardDesc}>{this.state.dataSource.horoscope}</Text>
+            </View>
+          </Card>
+          <Card style={[styles.scoreCard]}>
+            <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+              <Text>Love:    </Text>
+              <Rating
+                type='heart'
+                ratingCount={5}
+                startingValue={this.state.loveRate}                
+                imageSize={32}
+                ratingBackgroundColor='#c8c7c8'
+                readonly={true}
+              />
+            </View>
+            <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+              <Text>Money: </Text>
+              <Rating
+              type='rocket'
+                ratingCount={5}
+                startingValue={this.state.moneyRate}
+                imageSize={32}          
+                ratingBackgroundColor='#c8c7c8'
+                readonly={true}
+              />
+            </View>
+            <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+              <Text>Luck:    </Text>
+              <Rating
+                ratingCount={5}
+                startingValue={this.state.loveRate}
+                imageSize={32}
+                ratingBackgroundColor='#c8c7c8'
+                readonly={true}
+              />
+            </View>
+          </Card>
         </View>
       </ThemeProvider>
     );
@@ -245,11 +259,36 @@
      color: 'white',
      padding: 10,
    },
+   container2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    marginTop: -90
+    },
+   signDesc:{
+    fontSize: 25,
+    marginTop: 15,
+   },
+   cardTitle:{
+    fontSize: 25
+   },
+   cardDate: {
+    textAlign: 'justify',
+    fontSize: 10
+   },
+   cardDesc: {
+    marginTop: 5,
+    fontSize: 15
+   },
+   scoreCard: {
+     width: 800
+   }
  });
   
  const AppNavigator = createStackNavigator({
    Home: {
-     screen: App
+     screen: App,
    },
    Sign: {
      screen: Sign
