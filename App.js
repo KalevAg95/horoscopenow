@@ -12,7 +12,9 @@
  import { Header, ThemeProvider, Rating } from 'react-native-elements';
  import { FlatGrid } from 'react-native-super-grid';
  import { createAppContainer, createStackNavigator } from 'react-navigation';
- 
+ import { AdMobBanner } from 'react-native-admob';
+
+
  const instructions = Platform.select({
    ios: 'IOA,\n' + 'AD',
    android:
@@ -20,20 +22,21 @@
      'AD',
  });
  
+
  const items = [
-    { name: 'PISCES', color: '#80cdd4', color2: '#e5f5f6', text: 'Feb 19 - Mar 20', img: require('./res/horos_icons/pisces-fishes-shapes-sign.png') },
-    { name: 'AQUARIUS', color: '#80a8cf', color2: '#e5edf5', text: 'Jan 20 - Feb 18', img: require('./res/horos_icons/aquarius-zodiac-sign-symbol-1.png') },
-    { name: 'CAPRICORN', color: '#b88fc0', color2: '#f0e8f2', text: 'Dec 22 - Jan 19', img: require('./res/horos_icons/capricorn.png') },
-    { name: 'SAGITTARIUS', color: '#f18486', color2: '#fce6e6', text: 'Nov 22 - Dec 21', img: require('./res/horos_icons/sagittarius-sign-of-an-archer.png') },
-    { name: 'SCORPIO', color: '#81cba1', color2: '#e5f4ec', text: 'Oct 23 - Nov 21', img: require('./res/horos_icons/scorpion-shape.png') },
-    { name: 'LIBRA', color: '#7fbce1', color2: '#e5f1f9', text: 'Sep 23 - Oct 22', img: require('./res/horos_icons/libra-scale-balance-symbol.png') },
-    { name: 'VIRGO', color: '#dd87bf', color2: '#f8e7f2', text: 'Aug 23 - Sep 22', img: require('./res/horos_icons/virgo-female-silhouette.png') },
-    { name: 'LEO', color: '#f4a687', color2: '#fcede7', text: 'Jul 23 - Aug 22', img: require('./res/horos_icons/leo-astrological-sign.png') },
-    { name: 'CANCER', color: '#cadd8f', color2: '#f4f8e8', text: 'Jun 21 - Jul 22', img: require('./res/horos_icons/cancer-1.png') },
-    { name: 'GEMINI', color: '#fee980', color2: '#fefae5', text: 'May 21 - Jun 20', img: require('./res/horos_icons/gemini-two-twins-heads-symbol.png') },
-    { name: 'TAURUS', color: '#fddc7f', color2: '#fef8e5', text: 'Apr 20 - May 20', img: require('./res/horos_icons/taurus-bull-head-symbol-for-zodiac.png') },
-    { name: 'ARIES', color: '#f8be80', color2: '#fdf2e5', text: 'Mar 21 - Apr 19', img: require('./res/horos_icons/aries-zodiac-symbol-of-frontal-goat-head.png') }
-  ];
+  { name: 'PISCES', color: '#80cdd4', color2: '#e5f5f6', text: 'Feb 19 - Mar 20', img: require('./res/horos_icons/pisces-fishes-shapes-sign.png'), multiplier: 1.9 },
+  { name: 'AQUARIUS', color: '#80a8cf', color2: '#e5edf5', text: 'Jan 20 - Feb 18', img: require('./res/horos_icons/aquarius-zodiac-sign-symbol-1.png'), multiplier: 1.2 },
+  { name: 'CAPRICORN', color: '#b88fc0', color2: '#f0e8f2', text: 'Dec 22 - Jan 19', img: require('./res/horos_icons/capricorn.png'), multiplier: 2.4 },
+  { name: 'SAGITTARIUS', color: '#f18486', color2: '#fce6e6', text: 'Nov 22 - Dec 21', img: require('./res/horos_icons/sagittarius-sign-of-an-archer.png'), multiplier: 3.4 },
+  { name: 'SCORPIO', color: '#81cba1', color2: '#e5f4ec', text: 'Oct 23 - Nov 21', img: require('./res/horos_icons/scorpion-shape.png'), multiplier: 1.1 },
+  { name: 'LIBRA', color: '#7fbce1', color2: '#e5f1f9', text: 'Sep 23 - Oct 22', img: require('./res/horos_icons/libra-scale-balance-symbol.png'), multiplier: 2.1 },
+  { name: 'VIRGO', color: '#dd87bf', color2: '#f8e7f2', text: 'Aug 23 - Sep 22', img: require('./res/horos_icons/virgo-female-silhouette.png'), multiplier: 4.4 },
+  { name: 'LEO', color: '#f4a687', color2: '#fcede7', text: 'Jul 23 - Aug 22', img: require('./res/horos_icons/leo-astrological-sign.png'), multiplier: 1.5 },
+  { name: 'CANCER', color: '#cadd8f', color2: '#f4f8e8', text: 'Jun 21 - Jul 22', img: require('./res/horos_icons/cancer-1.png'), multiplier: 5.4 },
+  { name: 'GEMINI', color: '#fee980', color2: '#fefae5', text: 'May 21 - Jun 20', img: require('./res/horos_icons/gemini-two-twins-heads-symbol.png'), multiplier: 2.2 },
+  { name: 'TAURUS', color: '#fddc7f', color2: '#fef8e5', text: 'Apr 20 - May 20', img: require('./res/horos_icons/taurus-bull-head-symbol-for-zodiac.png'), multiplier: 1.3 },
+  { name: 'ARIES', color: '#f8be80', color2: '#fdf2e5', text: 'Mar 21 - Apr 19', img: require('./res/horos_icons/aries-zodiac-symbol-of-frontal-goat-head.png'), multiplier: 1.7 }
+];
  class App extends Component{
     static navigationOptions = {
       title: 'Welcome',
@@ -78,6 +81,12 @@
          <Text style={styles.welcome}>Fucking Amazing AD</Text>
          <Text style={styles.instructions}>HERE</Text>
          <Text style={styles.instructions}>{instructions}</Text>
+         <AdMobBanner
+              adSize="fullBanner"
+              adUnitID="ad unit ID"
+              testDevices={[AdMobBanner.simulatorId]}
+              onAdFailedToLoad={error => console.log(error)}
+          />
        </View>
        </ThemeProvider>
      );
@@ -85,22 +94,27 @@
  }
  
  class Sign extends Component{
+  
   static navigationOptions = {
     title: 'Back',
     headerTintColor: '#CFD8DC',
     headerStyle:{ backgroundColor: '#455A64', color: '#CFD8DC', fontSize: 28},
   };
+
   constructor(props){
     super(props);
     this.state = {
       isLoading: true,
       dataSource: false,
       currentSign: this.props.navigation.getParam('currentSign', 'No Sign'),
+      loveRate: 0,
+      moneyRate: 0,
+      luckRate: 0,
+
     }
   }
   
   componentDidMount(){
-    
 
     let request = 'https://horoscope-api.herokuapp.com/horoscope/today/'+this.state.currentSign.name;
 
@@ -108,9 +122,33 @@
       .then((response)=> response.json())
       .then((responseJson) => {
 
+        var dateArr = (Date.parse(responseJson.date)+'')
+       
+        var sum = dateArr.substring(5,7);
+
+        var loveRate=parseInt(sum);
+        var moneyRate=parseInt(sum);
+        var luckRate=parseInt(sum);
+
+        while(loveRate>5||moneyRate>5||luckRate>5){
+        if(loveRate>5){
+            loveRate=loveRate/(1.3*this.state.currentSign.multiplier);
+          }
+          if(moneyRate>5){
+            moneyRate=moneyRate/(3.6*this.state.currentSign.multiplier);
+          }
+          if(luckRate>5){
+            luckRate=luckRate/(5.9*this.state.currentSign.multiplier);
+          }    
+        }
+        
         this.setState({
           isLoading: false,
-          dataSource: responseJson
+          dataSource: responseJson,
+          loveRate: loveRate,
+          moneyRate:moneyRate,
+          luckRate: luckRate, 
+          
         })
 
       }).catch((error)=>{
@@ -119,28 +157,28 @@
   }
 
   render() {
+
     return (
       <ThemeProvider>
-
         <View style={styles.container}>
           <Image source={this.state.currentSign.img} style={{width: 200, height: 200}} />
           <Text>{this.state.dataSource.sunsign}</Text>
           <Text>{this.state.dataSource.date}</Text>
-          <Text>{this.state.dataSource.horoscope}</Text>
+          <Text>{this.state.dataSource.horoscope}</Text>         
           <Text>Love: </Text>
           <Rating
-            type='heart'
-            startingValue={5}
+            type='heart'            
             ratingCount={5}
+            startingValue={this.state.loveRate}
             imageSize={30}
             ratingBackgroundColor='#c8c7c8'
             readonly={true}
           />
           <Text>Money: </Text>
           <Rating
-          type='rocket'
+            type='rocket'
             ratingCount={5}
-            startingValue={2}
+            startingValue={this.state.moneyRate}
             imageSize={30}          
             ratingBackgroundColor='#c8c7c8'
             readonly={true}
@@ -148,7 +186,7 @@
           <Text>Luck: </Text>
           <Rating
             ratingCount={5}
-            startingValue={3}
+            startingValue={this.state.luckRate}
             imageSize={30}
             ratingBackgroundColor='#c8c7c8'
             readonly={true}
@@ -158,7 +196,6 @@
     );
   }
 }
-
  
  
  
