@@ -81,12 +81,7 @@
          <Text style={styles.welcome}>Fucking Amazing AD</Text>
          <Text style={styles.instructions}>HERE</Text>
          <Text style={styles.instructions}>{instructions}</Text>
-         <AdMobBanner
-              adSize="fullBanner"
-              adUnitID="ad unit ID"
-              testDevices={[AdMobBanner.simulatorId]}
-              onAdFailedToLoad={error => console.log(error)}
-          />
+         
        </View>
        </ThemeProvider>
      );
